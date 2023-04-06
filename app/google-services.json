@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "858768244581",
+    "firebase_url": "https://ashrafapplication-953ea-default-rtdb.firebaseio.com",
+    "project_id": "ashrafapplication-953ea",
+    "storage_bucket": "ashrafapplication-953ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858768244581:android:d6c2ace2670fbd4218ab8c",
+        "android_client_info": {
+          "package_name": "com.example.ashrafapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858768244581-ngionq16jdcm17g2hrca7192e6nt7u93.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ashrafapplication",
+            "certificate_hash": "65e0035860bb39559442ec3a39c88e690cc674dd"
+          }
+        },
+        {
+          "client_id": "858768244581-pu8ohnr957njari1idu1v6i43bgbc1in.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ashrafapplication",
+            "certificate_hash": "afe28720a44431bcff546fae62d26af70d8097fd"
+          }
+        },
+        {
+          "client_id": "858768244581-goa822dfl6vtjh1ee99pk28qmo94st4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-GmU-zXaTjrFoul_Rvedfw1Jr-K56OFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858768244581-goa822dfl6vtjh1ee99pk28qmo94st4s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
