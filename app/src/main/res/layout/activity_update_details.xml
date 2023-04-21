@@ -319,6 +319,7 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
+                android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/black"
                 app:hintTextColor="@color/black"
@@ -329,6 +330,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/muli_black"
                     android:inputType="phone"
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textCursorDrawable="@null" />
             </com.google.android.material.textfield.TextInputLayout>

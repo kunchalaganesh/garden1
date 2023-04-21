@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -15,10 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
@@ -26,12 +22,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private Context context;
     private List<DataClass> dataList;
     private String sdate;
+    private String type;
 
 
-    public MyAdapter(Context context, List<DataClass> dataList, String date) {
+    public MyAdapter(Context context, List<DataClass> dataList, String date, String type) {
         this.context = context;
         this.dataList = dataList;
         this.sdate = date;
+        this.type  = type;
     }
 
     @NonNull
@@ -142,6 +140,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
             intent.putExtra("createdtime", dataList.get(holder.getAdapterPosition()).getCreatedtime());
             intent.putExtra("updatedby", dataList.get(holder.getAdapterPosition()).getUpdatedby());
             intent.putExtra("updatedtime", dataList.get(holder.getAdapterPosition()).getUpdatedtime());
+            intent.putExtra("type", type);
             context.startActivity(intent);
         });
 

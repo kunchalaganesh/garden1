@@ -8,6 +8,11 @@
     android:background="@color/white"
     tools:context=".DetailsActivity">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -980,9 +985,14 @@
 
         </LinearLayout>
 
+
+    </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/edlayout"
+            android:layout_alignParentBottom="true">
 
             <com.github.clans.fab.FloatingActionMenu
                 android:layout_width="wrap_content"
@@ -1017,5 +1027,6 @@
                     app:fab_size="mini" />
             </com.github.clans.fab.FloatingActionMenu>
         </RelativeLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 </ScrollView>

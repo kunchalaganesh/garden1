@@ -86,7 +86,7 @@ public class UpdateDetailsActivity extends AppCompatActivity {
     String imageURL, oldnum, oldsdate, oldtdate;
 
     int hallamt, decoramt, eleamt, clnamt, dmgamt, genamt, waiamt, drnamt;
-    int a, b, c;
+    int a, b, c, o, n, ta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +120,7 @@ public class UpdateDetailsActivity extends AppCompatActivity {
         updateGuestHouse = findViewById(R.id.updateGuestHouse);
         updateVIPDine = findViewById(R.id.updateVIPDine);
         updateFunctionType = findViewById(R.id.updateFunctionType);
-        updateHallAmount = findViewById(R.id.updateHallAmount);
+        updateHallAmount = findViewById(R.id.uploadhallamount);
         updateAddress = findViewById(R.id.updateAddress);
         updatePeopleCapacity = findViewById(R.id.updatePeopleCapacity);
         key = getIntent().getStringExtra("key");
@@ -568,75 +568,183 @@ public class UpdateDetailsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-
-                if (!uploadhall.getEditText().getText().toString().matches("")) {
-                    hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
-
-                }else{
-                    hallamt = 0;
-                }
+                checkvalues();
 
 
-
-                if
-                (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
-                    decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
-
-                } else{
-                    decoramt = 0;
-                }
-
-                if (
-                        !updateElectricityBill.getEditText().getText().toString().matches("")) {
-                    eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
-
-                }else {
-                    eleamt = 0;
-                }
-
-                if
-                (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
-                    clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
-
-                }else{
-                    clnamt = 0;
-                }
-                if (
-                        !updateDamageCharges.getEditText().getText().toString().matches("")) {
-                    dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
-
-                } else {
-                    dmgamt = 0;
-                }
-
-                if (
-                        !updateGeneratorCharges.getEditText().getText().toString().matches("")) {
-                    genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
-
-                }else {
-                    genamt = 0;
-                }
-
-                if (
-                        !updateWaiterAmount.getEditText().getText().toString().matches("")) {
-                    waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
-
-                }else{
-                    waiamt = 0;
-                }
-                if (
-                        !updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
-
-
-                    drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
-
-                }else{
-                    drnamt = 0;
-                }
-                int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
-
-
-                updateTotalAmount.getEditText().setText(String.valueOf(a));
+//                if (!uploadhall.getEditText().getText().toString().matches("")) {
+//                    if(_HALLAMOUNT.matches("")){
+//                        o =0;
+//                    }else {
+//                        o = Integer.parseInt(_HALLAMOUNT);
+//                    }
+//                     n = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+//
+//                    if(o != n) {
+//
+//
+//                        hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+//                    }else{
+//                        hallamt = 0;
+//                    }
+//
+//                }else{
+//                    hallamt = 0;
+//                }
+//
+//
+//
+//                if
+//                (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
+//                    if(_DECORATIONAMOUNT.matches("")){
+//                        o =0;
+//                    }else {
+//                        o = Integer.parseInt(_DECORATIONAMOUNT);
+//                    }
+////                    int o = Integer.parseInt(_DECORATIONAMOUNT);
+//                    int n = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+//
+//                    if(o != n) {
+//                        decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+//
+//                    }else{
+//                        decoramt = 0;
+//                    }
+//
+//                } else{
+//                    decoramt = 0;
+//                }
+//
+//                if (!updateElectricityBill.getEditText().getText().toString().matches("")) {
+//                    if(_ELECTRICITYBILL.matches("")){
+//                        o =0;
+//                    }else {
+//                        o = Integer.parseInt(_ELECTRICITYBILL);
+//                    }
+//
+////                    int o = Integer.parseInt(_ELECTRICITYBILL);
+//                    int n = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+//
+//                    if(o != n) {
+//                        eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+//                    }else{
+//                        eleamt = 0;
+//                    }
+//
+//                }else {
+//                    eleamt = 0;
+//                }
+//
+//                if
+//                (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
+//                    if(_CLEANINGCHARGES.matches("")){
+//                        o =0;
+//                    }else {
+//                        o = Integer.parseInt(_CLEANINGCHARGES);
+//                    }
+//
+////                    int o = Integer.parseInt(_CLEANINGCHARGES);
+//                    int n = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+//
+//                    if(o != n) {
+//
+//                        clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+//                    }else{
+//                        clnamt = 0;
+//                    }
+//
+//                }else{
+//                    clnamt = 0;
+//                }
+//                if (!updateDamageCharges.getEditText().getText().toString().matches("")) {
+//                    if(_DAMAGECHARGES.matches("")){
+//                        o =0;
+//                    }else {
+//                        o = Integer.parseInt(_DAMAGECHARGES);
+//                    }
+//
+////                    int o = Integer.parseInt(_DAMAGECHARGES);
+//                    int n = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+//
+//                    if(o != n) {
+//
+//                        dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+//
+//                    }else{
+//                        dmgamt = 0;
+//                    }
+//
+//
+//                } else {
+//                    dmgamt = 0;
+//                }
+//
+//                if (!updateGeneratorCharges.getEditText().getText().toString().matches("")) {
+//
+//                    if(_GENERATORCHARGES.matches("")){
+//                        o =0;
+//                    }else {
+//                        o = Integer.parseInt(_GENERATORCHARGES);
+//                    }
+////                    int o = Integer.parseInt(_GENERATORCHARGES);
+//                    int n = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+//
+//                    if(o != n) {
+//
+//                        genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+//                    }else{
+//                        genamt = 0;
+//                    }
+//
+//                }else {
+//                    genamt = 0;
+//                }
+//
+//                if (!updateWaiterAmount.getEditText().getText().toString().matches("")) {
+//                    if(_WAITERAMOUNT.matches("")){
+//                        o =0;
+//                    }else {
+//                        o = Integer.parseInt(_WAITERAMOUNT);
+//                    }
+//
+////                    int o = Integer.parseInt(_WAITERAMOUNT);
+//                    int n = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+//
+//                    if(o != n) {
+//
+//                        waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+//
+//                    }else {
+//                        waiamt = 0;
+//                    }
+//
+//                }else{
+//                    waiamt = 0;
+//                }
+//                if (!updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
+//
+//                    if(_DRINKINGWATERAMOUNT.matches("")){
+//                        o =0;
+//                    }else {
+//                        o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+//                    }
+////                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+//                    int n = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+//
+//                    if(o != n) {
+//                        drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+//                    }else {
+//                        drnamt = 0;
+//                    }
+//
+//                }else{
+//                    drnamt = 0;
+//                }
+//                int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
+//
+//
+//                updateTotalAmount.getEditText().setText(String.valueOf(
+//                        Integer.parseInt(_TOTALAMOUNT)+a
+//                ));
 
 
             }
@@ -656,9 +764,27 @@ public class UpdateDetailsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                checkvalues();
 
+
+
+
+                /**
                 if (!uploadhall.getEditText().getText().toString().matches("")) {
-                    hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    if(_HALLAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_HALLAMOUNT);
+                    }
+                    n = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+
+                        hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    }else{
+                        hallamt = 0;
+                    }
 
                 }else{
                     hallamt = 0;
@@ -668,15 +794,40 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
-                    decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+                    if(_DECORATIONAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DECORATIONAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DECORATIONAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    }else{
+                        decoramt = 0;
+                    }
 
                 } else{
                     decoramt = 0;
                 }
 
-                if (
-                        !updateElectricityBill.getEditText().getText().toString().matches("")) {
-                    eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                if (!updateElectricityBill.getEditText().getText().toString().matches("")) {
+                    if(_ELECTRICITYBILL.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_ELECTRICITYBILL);
+                    }
+
+//                    int o = Integer.parseInt(_ELECTRICITYBILL);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                    }else{
+                        eleamt = 0;
+                    }
 
                 }else {
                     eleamt = 0;
@@ -684,39 +835,105 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
-                    clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    if(_CLEANINGCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_CLEANINGCHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_CLEANINGCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    }else{
+                        clnamt = 0;
+                    }
 
                 }else{
                     clnamt = 0;
                 }
-                if (
-                        !updateDamageCharges.getEditText().getText().toString().matches("")) {
-                    dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+                if (!updateDamageCharges.getEditText().getText().toString().matches("")) {
+                    if(_DAMAGECHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DAMAGECHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_DAMAGECHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    }else{
+                        dmgamt = 0;
+                    }
+
 
                 } else {
                     dmgamt = 0;
                 }
 
-                if (
-                        !updateGeneratorCharges.getEditText().getText().toString().matches("")) {
-                    genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                if (!updateGeneratorCharges.getEditText().getText().toString().matches("")) {
+
+                    if(_GENERATORCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_GENERATORCHARGES);
+                    }
+//                    int o = Integer.parseInt(_GENERATORCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                    }else{
+                        genamt = 0;
+                    }
 
                 }else {
                     genamt = 0;
                 }
 
-                if (
-                        !updateWaiterAmount.getEditText().getText().toString().matches("")) {
-                    waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+                if (!updateWaiterAmount.getEditText().getText().toString().matches("")) {
+                    if(_WAITERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_WAITERAMOUNT);
+                    }
+
+//                    int o = Integer.parseInt(_WAITERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    }else {
+                        waiamt = 0;
+                    }
 
                 }else{
                     waiamt = 0;
                 }
-                if (
-                        !updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
+                if (!updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
 
+                    if(_DRINKINGWATERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
 
-                    drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    if(o != n) {
+                        drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    }else {
+                        drnamt = 0;
+                    }
 
                 }else{
                     drnamt = 0;
@@ -724,7 +941,11 @@ public class UpdateDetailsActivity extends AppCompatActivity {
                 int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
 
 
-                updateTotalAmount.getEditText().setText(String.valueOf(a));
+                updateTotalAmount.getEditText().setText(String.valueOf(
+                        Integer.parseInt(_TOTALAMOUNT)+a
+                ));
+
+                **/
 
 
             }
@@ -744,9 +965,26 @@ public class UpdateDetailsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                checkvalues();
 
+
+
+                /**
                 if (!uploadhall.getEditText().getText().toString().matches("")) {
-                    hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    if(_HALLAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_HALLAMOUNT);
+                    }
+                    n = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+
+                        hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    }else{
+                        hallamt = 0;
+                    }
 
                 }else{
                     hallamt = 0;
@@ -756,15 +994,40 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
-                    decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+                    if(_DECORATIONAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DECORATIONAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DECORATIONAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    }else{
+                        decoramt = 0;
+                    }
 
                 } else{
                     decoramt = 0;
                 }
 
-                if (
-                        !updateElectricityBill.getEditText().getText().toString().matches("")) {
-                    eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                if (!updateElectricityBill.getEditText().getText().toString().matches("")) {
+                    if(_ELECTRICITYBILL.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_ELECTRICITYBILL);
+                    }
+
+//                    int o = Integer.parseInt(_ELECTRICITYBILL);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                    }else{
+                        eleamt = 0;
+                    }
 
                 }else {
                     eleamt = 0;
@@ -772,39 +1035,105 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
-                    clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    if(_CLEANINGCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_CLEANINGCHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_CLEANINGCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    }else{
+                        clnamt = 0;
+                    }
 
                 }else{
                     clnamt = 0;
                 }
-                if (
-                        !updateDamageCharges.getEditText().getText().toString().matches("")) {
-                    dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+                if (!updateDamageCharges.getEditText().getText().toString().matches("")) {
+                    if(_DAMAGECHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DAMAGECHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_DAMAGECHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    }else{
+                        dmgamt = 0;
+                    }
+
 
                 } else {
                     dmgamt = 0;
                 }
 
-                if (
-                        !updateGeneratorCharges.getEditText().getText().toString().matches("")) {
-                    genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                if (!updateGeneratorCharges.getEditText().getText().toString().matches("")) {
+
+                    if(_GENERATORCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_GENERATORCHARGES);
+                    }
+//                    int o = Integer.parseInt(_GENERATORCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                    }else{
+                        genamt = 0;
+                    }
 
                 }else {
                     genamt = 0;
                 }
 
-                if (
-                        !updateWaiterAmount.getEditText().getText().toString().matches("")) {
-                    waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+                if (!updateWaiterAmount.getEditText().getText().toString().matches("")) {
+                    if(_WAITERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_WAITERAMOUNT);
+                    }
+
+//                    int o = Integer.parseInt(_WAITERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    }else {
+                        waiamt = 0;
+                    }
 
                 }else{
                     waiamt = 0;
                 }
-                if (
-                        !updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
+                if (!updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
 
+                    if(_DRINKINGWATERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
 
-                    drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    if(o != n) {
+                        drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    }else {
+                        drnamt = 0;
+                    }
 
                 }else{
                     drnamt = 0;
@@ -812,7 +1141,11 @@ public class UpdateDetailsActivity extends AppCompatActivity {
                 int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
 
 
-                updateTotalAmount.getEditText().setText(String.valueOf(a));
+                updateTotalAmount.getEditText().setText(String.valueOf(
+                        Integer.parseInt(_TOTALAMOUNT)+a
+                ));
+
+                **/
 
 
             }
@@ -833,8 +1166,25 @@ public class UpdateDetailsActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
+                checkvalues();
+
+                /**
+
                 if (!uploadhall.getEditText().getText().toString().matches("")) {
-                    hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    if(_HALLAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_HALLAMOUNT);
+                    }
+                    n = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+
+                        hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    }else{
+                        hallamt = 0;
+                    }
 
                 }else{
                     hallamt = 0;
@@ -844,15 +1194,40 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
-                    decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+                    if(_DECORATIONAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DECORATIONAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DECORATIONAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    }else{
+                        decoramt = 0;
+                    }
 
                 } else{
                     decoramt = 0;
                 }
 
-                if (
-                        !updateElectricityBill.getEditText().getText().toString().matches("")) {
-                    eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                if (!updateElectricityBill.getEditText().getText().toString().matches("")) {
+                    if(_ELECTRICITYBILL.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_ELECTRICITYBILL);
+                    }
+
+//                    int o = Integer.parseInt(_ELECTRICITYBILL);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                    }else{
+                        eleamt = 0;
+                    }
 
                 }else {
                     eleamt = 0;
@@ -860,39 +1235,105 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
-                    clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    if(_CLEANINGCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_CLEANINGCHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_CLEANINGCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    }else{
+                        clnamt = 0;
+                    }
 
                 }else{
                     clnamt = 0;
                 }
-                if (
-                        !updateDamageCharges.getEditText().getText().toString().matches("")) {
-                    dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+                if (!updateDamageCharges.getEditText().getText().toString().matches("")) {
+                    if(_DAMAGECHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DAMAGECHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_DAMAGECHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    }else{
+                        dmgamt = 0;
+                    }
+
 
                 } else {
                     dmgamt = 0;
                 }
 
-                if (
-                        !updateGeneratorCharges.getEditText().getText().toString().matches("")) {
-                    genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                if (!updateGeneratorCharges.getEditText().getText().toString().matches("")) {
+
+                    if(_GENERATORCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_GENERATORCHARGES);
+                    }
+//                    int o = Integer.parseInt(_GENERATORCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                    }else{
+                        genamt = 0;
+                    }
 
                 }else {
                     genamt = 0;
                 }
 
-                if (
-                        !updateWaiterAmount.getEditText().getText().toString().matches("")) {
-                    waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+                if (!updateWaiterAmount.getEditText().getText().toString().matches("")) {
+                    if(_WAITERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_WAITERAMOUNT);
+                    }
+
+//                    int o = Integer.parseInt(_WAITERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    }else {
+                        waiamt = 0;
+                    }
 
                 }else{
                     waiamt = 0;
                 }
-                if (
-                        !updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
+                if (!updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
 
+                    if(_DRINKINGWATERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
 
-                    drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    if(o != n) {
+                        drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    }else {
+                        drnamt = 0;
+                    }
 
                 }else{
                     drnamt = 0;
@@ -900,7 +1341,12 @@ public class UpdateDetailsActivity extends AppCompatActivity {
                 int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
 
 
-                updateTotalAmount.getEditText().setText(String.valueOf(a));
+                updateTotalAmount.getEditText().setText(String.valueOf(
+                        Integer.parseInt(_TOTALAMOUNT)+a
+                ));
+
+
+                **/
 
 
             }
@@ -920,9 +1366,26 @@ public class UpdateDetailsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                checkvalues();
+
+
+                /**
 
                 if (!uploadhall.getEditText().getText().toString().matches("")) {
-                    hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    if(_HALLAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_HALLAMOUNT);
+                    }
+                    n = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+
+                        hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    }else{
+                        hallamt = 0;
+                    }
 
                 }else{
                     hallamt = 0;
@@ -932,15 +1395,40 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
-                    decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+                    if(_DECORATIONAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DECORATIONAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DECORATIONAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    }else{
+                        decoramt = 0;
+                    }
 
                 } else{
                     decoramt = 0;
                 }
 
-                if (
-                        !updateElectricityBill.getEditText().getText().toString().matches("")) {
-                    eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                if (!updateElectricityBill.getEditText().getText().toString().matches("")) {
+                    if(_ELECTRICITYBILL.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_ELECTRICITYBILL);
+                    }
+
+//                    int o = Integer.parseInt(_ELECTRICITYBILL);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                    }else{
+                        eleamt = 0;
+                    }
 
                 }else {
                     eleamt = 0;
@@ -948,39 +1436,105 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
-                    clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    if(_CLEANINGCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_CLEANINGCHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_CLEANINGCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    }else{
+                        clnamt = 0;
+                    }
 
                 }else{
                     clnamt = 0;
                 }
-                if (
-                        !updateDamageCharges.getEditText().getText().toString().matches("")) {
-                    dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+                if (!updateDamageCharges.getEditText().getText().toString().matches("")) {
+                    if(_DAMAGECHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DAMAGECHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_DAMAGECHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    }else{
+                        dmgamt = 0;
+                    }
+
 
                 } else {
                     dmgamt = 0;
                 }
 
-                if (
-                        !updateGeneratorCharges.getEditText().getText().toString().matches("")) {
-                    genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                if (!updateGeneratorCharges.getEditText().getText().toString().matches("")) {
+
+                    if(_GENERATORCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_GENERATORCHARGES);
+                    }
+//                    int o = Integer.parseInt(_GENERATORCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                    }else{
+                        genamt = 0;
+                    }
 
                 }else {
                     genamt = 0;
                 }
 
-                if (
-                        !updateWaiterAmount.getEditText().getText().toString().matches("")) {
-                    waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+                if (!updateWaiterAmount.getEditText().getText().toString().matches("")) {
+                    if(_WAITERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_WAITERAMOUNT);
+                    }
+
+//                    int o = Integer.parseInt(_WAITERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    }else {
+                        waiamt = 0;
+                    }
 
                 }else{
                     waiamt = 0;
                 }
-                if (
-                        !updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
+                if (!updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
 
+                    if(_DRINKINGWATERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
 
-                    drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    if(o != n) {
+                        drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    }else {
+                        drnamt = 0;
+                    }
 
                 }else{
                     drnamt = 0;
@@ -988,7 +1542,11 @@ public class UpdateDetailsActivity extends AppCompatActivity {
                 int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
 
 
-                updateTotalAmount.getEditText().setText(String.valueOf(a));
+                updateTotalAmount.getEditText().setText(String.valueOf(
+                        Integer.parseInt(_TOTALAMOUNT)+a
+                ));
+
+                **/
 
 
             }
@@ -1008,9 +1566,26 @@ public class UpdateDetailsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                checkvalues();
+
+
+                /**
 
                 if (!uploadhall.getEditText().getText().toString().matches("")) {
-                    hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    if(_HALLAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_HALLAMOUNT);
+                    }
+                    n = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+
+                        hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    }else{
+                        hallamt = 0;
+                    }
 
                 }else{
                     hallamt = 0;
@@ -1020,15 +1595,40 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
-                    decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+                    if(_DECORATIONAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DECORATIONAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DECORATIONAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    }else{
+                        decoramt = 0;
+                    }
 
                 } else{
                     decoramt = 0;
                 }
 
-                if (
-                        !updateElectricityBill.getEditText().getText().toString().matches("")) {
-                    eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                if (!updateElectricityBill.getEditText().getText().toString().matches("")) {
+                    if(_ELECTRICITYBILL.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_ELECTRICITYBILL);
+                    }
+
+//                    int o = Integer.parseInt(_ELECTRICITYBILL);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                    }else{
+                        eleamt = 0;
+                    }
 
                 }else {
                     eleamt = 0;
@@ -1036,39 +1636,105 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
-                    clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    if(_CLEANINGCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_CLEANINGCHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_CLEANINGCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    }else{
+                        clnamt = 0;
+                    }
 
                 }else{
                     clnamt = 0;
                 }
-                if (
-                        !updateDamageCharges.getEditText().getText().toString().matches("")) {
-                    dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+                if (!updateDamageCharges.getEditText().getText().toString().matches("")) {
+                    if(_DAMAGECHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DAMAGECHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_DAMAGECHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    }else{
+                        dmgamt = 0;
+                    }
+
 
                 } else {
                     dmgamt = 0;
                 }
 
-                if (
-                        !updateGeneratorCharges.getEditText().getText().toString().matches("")) {
-                    genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                if (!updateGeneratorCharges.getEditText().getText().toString().matches("")) {
+
+                    if(_GENERATORCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_GENERATORCHARGES);
+                    }
+//                    int o = Integer.parseInt(_GENERATORCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                    }else{
+                        genamt = 0;
+                    }
 
                 }else {
                     genamt = 0;
                 }
 
-                if (
-                        !updateWaiterAmount.getEditText().getText().toString().matches("")) {
-                    waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+                if (!updateWaiterAmount.getEditText().getText().toString().matches("")) {
+                    if(_WAITERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_WAITERAMOUNT);
+                    }
+
+//                    int o = Integer.parseInt(_WAITERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    }else {
+                        waiamt = 0;
+                    }
 
                 }else{
                     waiamt = 0;
                 }
-                if (
-                        !updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
+                if (!updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
 
+                    if(_DRINKINGWATERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
 
-                    drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    if(o != n) {
+                        drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    }else {
+                        drnamt = 0;
+                    }
 
                 }else{
                     drnamt = 0;
@@ -1076,7 +1742,11 @@ public class UpdateDetailsActivity extends AppCompatActivity {
                 int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
 
 
-                updateTotalAmount.getEditText().setText(String.valueOf(a));
+                updateTotalAmount.getEditText().setText(String.valueOf(
+                        Integer.parseInt(_TOTALAMOUNT)+a
+                ));
+
+                **/
 
 
             }
@@ -1097,8 +1767,24 @@ public class UpdateDetailsActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
+                checkvalues();
+
+                /**
                 if (!uploadhall.getEditText().getText().toString().matches("")) {
-                    hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    if(_HALLAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_HALLAMOUNT);
+                    }
+                    n = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+
+                        hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+                    }else{
+                        hallamt = 0;
+                    }
 
                 }else{
                     hallamt = 0;
@@ -1108,15 +1794,40 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
-                    decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+                    if(_DECORATIONAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DECORATIONAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DECORATIONAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+                    }else{
+                        decoramt = 0;
+                    }
 
                 } else{
                     decoramt = 0;
                 }
 
-                if (
-                        !updateElectricityBill.getEditText().getText().toString().matches("")) {
-                    eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                if (!updateElectricityBill.getEditText().getText().toString().matches("")) {
+                    if(_ELECTRICITYBILL.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_ELECTRICITYBILL);
+                    }
+
+//                    int o = Integer.parseInt(_ELECTRICITYBILL);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+
+                    if(o != n) {
+                        eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+                    }else{
+                        eleamt = 0;
+                    }
 
                 }else {
                     eleamt = 0;
@@ -1124,39 +1835,105 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
                 if
                 (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
-                    clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    if(_CLEANINGCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_CLEANINGCHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_CLEANINGCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+                    }else{
+                        clnamt = 0;
+                    }
 
                 }else{
                     clnamt = 0;
                 }
-                if (
-                        !updateDamageCharges.getEditText().getText().toString().matches("")) {
-                    dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+                if (!updateDamageCharges.getEditText().getText().toString().matches("")) {
+                    if(_DAMAGECHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DAMAGECHARGES);
+                    }
+
+//                    int o = Integer.parseInt(_DAMAGECHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+                    }else{
+                        dmgamt = 0;
+                    }
+
 
                 } else {
                     dmgamt = 0;
                 }
 
-                if (
-                        !updateGeneratorCharges.getEditText().getText().toString().matches("")) {
-                    genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                if (!updateGeneratorCharges.getEditText().getText().toString().matches("")) {
+
+                    if(_GENERATORCHARGES.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_GENERATORCHARGES);
+                    }
+//                    int o = Integer.parseInt(_GENERATORCHARGES);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+                    }else{
+                        genamt = 0;
+                    }
 
                 }else {
                     genamt = 0;
                 }
 
-                if (
-                        !updateWaiterAmount.getEditText().getText().toString().matches("")) {
-                    waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+                if (!updateWaiterAmount.getEditText().getText().toString().matches("")) {
+                    if(_WAITERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_WAITERAMOUNT);
+                    }
+
+//                    int o = Integer.parseInt(_WAITERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    if(o != n) {
+
+                        waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+                    }else {
+                        waiamt = 0;
+                    }
 
                 }else{
                     waiamt = 0;
                 }
-                if (
-                        !updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
+                if (!updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
 
+                    if(_DRINKINGWATERAMOUNT.matches("")){
+                        o =0;
+                    }else {
+                        o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+                    int n = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
 
-                    drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    if(o != n) {
+                        drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+                    }else {
+                        drnamt = 0;
+                    }
 
                 }else{
                     drnamt = 0;
@@ -1164,7 +1941,11 @@ public class UpdateDetailsActivity extends AppCompatActivity {
                 int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
 
 
-                updateTotalAmount.getEditText().setText(String.valueOf(a));
+                updateTotalAmount.getEditText().setText(String.valueOf(
+                        Integer.parseInt(_TOTALAMOUNT)+a
+                ));
+
+                **/
 
 
             }
@@ -1184,81 +1965,18 @@ public class UpdateDetailsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-
-                if (!uploadhall.getEditText().getText().toString().matches("")) {
-                    hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
-
-                }else{
-                    hallamt = 0;
-                }
+                checkvalues();
 
 
 
-                if
-                (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
-                    decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
-
-                } else{
-                    decoramt = 0;
-                }
-
-                if (
-                        !updateElectricityBill.getEditText().getText().toString().matches("")) {
-                    eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
-
-                }else {
-                    eleamt = 0;
-                }
-
-                if
-                (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
-                    clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
-
-                }else{
-                    clnamt = 0;
-                }
-                if (
-                        !updateDamageCharges.getEditText().getText().toString().matches("")) {
-                    dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
-
-                } else {
-                    dmgamt = 0;
-                }
-
-                if (
-                        !updateGeneratorCharges.getEditText().getText().toString().matches("")) {
-                    genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
-
-                }else {
-                    genamt = 0;
-                }
-
-                if (
-                        !updateWaiterAmount.getEditText().getText().toString().matches("")) {
-                    waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
-
-                }else{
-                    waiamt = 0;
-                }
-                if (
-                        !updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
-
-
-                    drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
-
-                }else{
-                    drnamt = 0;
-                }
-                int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
-
-
-                updateTotalAmount.getEditText().setText(String.valueOf(a));
 
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+//                _DRINKINGWATERAMOUNT = updateDrinkingWaterAmount.getEditText().getText().toString();
 
             }
         });
@@ -1273,6 +1991,264 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
 
     }
+
+    private void checkvalues() {
+
+
+
+        if (!uploadhall.getEditText().getText().toString().matches("")) {
+
+            if(_HALLAMOUNT.matches("")){
+                o =0;
+            }else {
+                o = Integer.parseInt(_HALLAMOUNT);
+            }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+            n = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString());
+
+            if(o < n) {
+                hallamt = Integer.parseInt(Objects.requireNonNull(uploadhall.getEditText()).getText().toString())-o;
+            }if(o > n) {
+                hallamt = -(o-n);
+            }if(o == n){
+                hallamt = 0;
+            }
+
+        }else{
+            if(_HALLAMOUNT.matches("")) {
+                hallamt = 0;
+            }else{
+                hallamt = -Integer.parseInt(_HALLAMOUNT);
+            }
+        }
+
+
+
+        if (!updateDecorationAmount.getEditText().getText().toString().matches("")) {
+
+
+            if(_DECORATIONAMOUNT.matches("")){
+                o =0;
+            }else {
+                o = Integer.parseInt(_DECORATIONAMOUNT);
+            }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+            n = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString());
+
+            if(o < n) {
+                decoramt = Integer.parseInt(Objects.requireNonNull(updateDecorationAmount.getEditText()).getText().toString())-o;
+            }if(o > n) {
+                decoramt = -(o-n);
+            }if(o == n){
+                decoramt = 0;
+            }
+
+        }else{
+            if(_DECORATIONAMOUNT.matches("")) {
+                decoramt = 0;
+            }else{
+                decoramt = -Integer.parseInt(_DECORATIONAMOUNT);
+            }
+        }
+
+
+
+
+        if (!updateElectricityBill.getEditText().getText().toString().matches("")) {
+
+
+            if(_ELECTRICITYBILL.matches("")){
+                o =0;
+            }else {
+                o = Integer.parseInt(_ELECTRICITYBILL);
+            }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+            n = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString());
+
+            if(o < n) {
+                eleamt = Integer.parseInt(Objects.requireNonNull(updateElectricityBill.getEditText()).getText().toString())-o;
+            }if(o > n) {
+                eleamt = -(o-n);
+            }if(o == n){
+                eleamt = 0;
+            }
+
+        }else{
+            if(_ELECTRICITYBILL.matches("")) {
+                eleamt = 0;
+            }else{
+                eleamt = -Integer.parseInt(_ELECTRICITYBILL);
+            }
+        }
+
+
+
+
+
+        if
+        (!updateCleaningCharges.getEditText().getText().toString().matches("")) {
+
+
+
+            if(_CLEANINGCHARGES.matches("")){
+                o =0;
+            }else {
+                o = Integer.parseInt(_CLEANINGCHARGES);
+            }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+            n = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString());
+
+            if(o < n) {
+                clnamt = Integer.parseInt(Objects.requireNonNull(updateCleaningCharges.getEditText()).getText().toString())-o;
+            }if(o > n) {
+                clnamt = -(o-n);
+            }if(o == n){
+                clnamt = 0;
+            }
+
+        }else{
+            if(_CLEANINGCHARGES.matches("")) {
+                clnamt = 0;
+            }else{
+                clnamt = -Integer.parseInt(_CLEANINGCHARGES);
+            }
+        }
+
+
+
+        if (!updateDamageCharges.getEditText().getText().toString().matches("")) {
+
+            if(_DAMAGECHARGES.matches("")){
+                o =0;
+            }else {
+                o = Integer.parseInt(_DAMAGECHARGES);
+            }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+            n = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString());
+
+            if(o < n) {
+                dmgamt = Integer.parseInt(Objects.requireNonNull(updateDamageCharges.getEditText()).getText().toString())-o;
+            }if(o > n) {
+                dmgamt = -(o-n);
+            }if(o == n){
+                dmgamt = 0;
+            }
+
+        }else{
+            if(_DAMAGECHARGES.matches("")) {
+                dmgamt = 0;
+            }else{
+                dmgamt = -Integer.parseInt(_DAMAGECHARGES);
+            }
+        }
+
+
+
+
+        if (!updateGeneratorCharges.getEditText().getText().toString().matches("")) {
+
+
+            if(_GENERATORCHARGES.matches("")){
+                o =0;
+            }else {
+                o = Integer.parseInt(_GENERATORCHARGES);
+            }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+            n = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString());
+
+            if(o < n) {
+                genamt = Integer.parseInt(Objects.requireNonNull(updateGeneratorCharges.getEditText()).getText().toString())-o;
+            }if(o > n) {
+                genamt = -(o-n);
+            }if(o == n){
+                genamt = 0;
+            }
+
+        }else{
+            if(_GENERATORCHARGES.matches("")) {
+                genamt = 0;
+            }else{
+                genamt = -Integer.parseInt(_GENERATORCHARGES);
+            }
+        }
+
+
+
+
+
+        if (!updateWaiterAmount.getEditText().getText().toString().matches("")) {
+
+
+            if(_WAITERAMOUNT.matches("")){
+                o =0;
+            }else {
+                o = Integer.parseInt(_WAITERAMOUNT);
+            }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+            n = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString());
+
+            if(o < n) {
+                waiamt = Integer.parseInt(Objects.requireNonNull(updateWaiterAmount.getEditText()).getText().toString())-o;
+            }if(o > n) {
+                waiamt = -(o-n);
+            }if(o == n){
+                waiamt = 0;
+            }
+
+        }else{
+            if(_WAITERAMOUNT.matches("")) {
+                waiamt = 0;
+            }else{
+                waiamt = -Integer.parseInt(_WAITERAMOUNT);
+            }
+        }
+
+
+
+        if (!updateDrinkingWaterAmount.getEditText().getText().toString().matches("")) {
+
+            if(_DRINKINGWATERAMOUNT.matches("")){
+                o =0;
+            }else {
+                o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+            }
+//                    int o = Integer.parseInt(_DRINKINGWATERAMOUNT);
+            n = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString());
+
+            if(o < n) {
+                drnamt = Integer.parseInt(Objects.requireNonNull(updateDrinkingWaterAmount.getEditText()).getText().toString())-o;
+            }if(o > n) {
+                drnamt = -(o-n);
+            }if(o == n){
+                drnamt = 0;
+            }
+
+        }else{
+            if(_DRINKINGWATERAMOUNT.matches("")) {
+                drnamt = 0;
+            }else{
+                drnamt = -Integer.parseInt(_DRINKINGWATERAMOUNT);
+            }
+        }
+
+        Log.d("checktotal ", updateDrinkingWaterAmount.getEditText().getText().toString()+"  "+_DRINKINGWATERAMOUNT
+                +"  "
+        +String.valueOf(drnamt)+"  "+String.valueOf(o)+"  "+String.valueOf(n));
+        int a = hallamt + decoramt + eleamt + clnamt + dmgamt + genamt + waiamt + drnamt;
+//        int c = waiamt+ drnamt;
+
+//        _DRINKINGWATERAMOUNT = updateDrinkingWaterAmount.getEditText().getText().toString();
+
+
+        updateTotalAmount.getEditText().setText(String.valueOf(
+                Integer.parseInt(_TOTALAMOUNT)+a
+        ));
+
+
+
+
+    }
+
 
     private static List<Date> getDates(String dateString1, String dateString2)
     {
@@ -1521,7 +2497,12 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
     private boolean isRemainingBalChanged() {
         if (!_REMAININGBAL.equals(updateRemainingBal.getEditText().getText().toString())) {
-            databaseReference.child(key).child("dataRemainingBal").setValue(updateRemainingBal.getEditText().getText().toString());
+            if(updateRemainingBal.getEditText().getText().toString().matches("")){
+                databaseReference.child(key).child("dataRemainingBal").setValue("0");
+            }else {
+                databaseReference.child(key).child("dataRemainingBal").setValue(updateRemainingBal.getEditText().getText().toString());
+
+            }
             _REMAININGBAL = updateRemainingBal.getEditText().getText().toString();
             return true;
         } else {
@@ -1531,7 +2512,14 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
     private boolean isAdvPaidChanged() {
         if (!_ADVPAID.equals(updateAdvPaid.getEditText().getText().toString())) {
-            databaseReference.child(key).child("dataAdvPaid").setValue(updateAdvPaid.getEditText().getText().toString());
+
+            if(updateAdvPaid.getEditText().getText().toString().matches("")){
+                databaseReference.child(key).child("dataAdvPaid").setValue("0");
+            }else {
+                databaseReference.child(key).child("dataAdvPaid").setValue(updateAdvPaid.getEditText().getText().toString());
+
+            }
+//            databaseReference.child(key).child("dataAdvPaid").setValue(updateAdvPaid.getEditText().getText().toString());
             _ADVPAID = updateAdvPaid.getEditText().getText().toString();
             return true;
         } else {
@@ -1541,7 +2529,16 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
     private boolean isTotalAmountChanged() {
         if (!_TOTALAMOUNT.equals(updateTotalAmount.getEditText().getText().toString())) {
-            databaseReference.child(key).child("dataTotalAmount").setValue(updateTotalAmount.getEditText().getText().toString());
+
+            if(updateTotalAmount.getEditText().getText().toString().matches("")){
+                databaseReference.child(key).child("dataTotalAmount").setValue("0");
+            }else {
+                databaseReference.child(key).child("dataTotalAmount").setValue(updateTotalAmount.getEditText().getText().toString());
+
+            }
+
+
+//            databaseReference.child(key).child("dataTotalAmount").setValue(updateTotalAmount.getEditText().getText().toString());
             _TOTALAMOUNT = updateTotalAmount.getEditText().getText().toString();
             return true;
         } else {

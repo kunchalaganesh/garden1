@@ -1116,7 +1116,6 @@ public class UploadActivity extends AppCompatActivity {
         String _uploadGuestHouse = uploadGuestHouse.getEditText().getText().toString();
         String _uploadVIPDine = uploadVIPDine.getEditText().getText().toString();
         String _uploadFunctionType = uploadFunctionType.getEditText().getText().toString();
-        String _uploadHallAmount = uploadHallAmount.getEditText().getText().toString();
         String _uploadAddress = uploadAddress.getEditText().getText().toString();
         String _uploadPeopleCapacity = uploadPeopleCapacity.getEditText().getText().toString();
         String _hallamount = uploadhall.getEditText().getText().toString();
@@ -1136,8 +1135,7 @@ public class UploadActivity extends AppCompatActivity {
                 _uploadHowManyDays, _radioGroup, _uploadFromDate, _uploadToDate, _uploadTotalAmount, _uploadAdvPaid,
                 _uploadRemainingBal, _uploadAdvReceivedBy, _uploadBalReceivedBy, _uploadDecorationAmount,
                 _uploadElectricityBill, _uploadCleaningCharges, _uploadWaiterAmount, _uploadDrinkingWaterAmount,
-                _uploadDesc, imageURL, _uploadGeneratorCharges, _uploadDamageCharges, _uploadGuestHouse, _uploadVIPDine, _uploadFunctionType,
-                _uploadHallAmount, _uploadAddress,
+                _uploadDesc, imageURL, _uploadGeneratorCharges, _uploadDamageCharges, _uploadGuestHouse, _uploadVIPDine, _uploadFunctionType, _uploadAddress,
                 _uploadPeopleCapacity, _hallamount, _referredby, FirebaseAuth.getInstance().getUid(), String.valueOf(System.currentTimeMillis()), "", "");
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.

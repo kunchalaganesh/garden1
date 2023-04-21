@@ -27,7 +27,6 @@ public class DataClass {
     private String dataGuestHouse;
     private String dataVIPDine;
     private String dataFunctionType;
-    private String dataHallAmount;
     private String dataAddress;
     private String dataPeopleCapacity;
     private String hallamount;
@@ -47,7 +46,7 @@ public class DataClass {
     public DataClass(String dataFullName, String dataPhoneNumber, String dataEmail, String dataDays, String dataAcNonAc, String dataFromDate, String dataToDate,
                      String dataTotalAmount, String dataAdvPaid, String dataRemainingBal, String dataAdvReceivedBy, String dataBalReceivedBy, String dataDecorationAmount,
                      String dataElectricityBill, String dataCleaningCharges, String dataWaiterAmount, String dataDrinkingWater, String dataDesc, String dataImage,
-                     String dataGeneratorCharges, String dataDamageCharges, String dataGuestHouse, String dataVIPDine, String dataFunctionType, String dataHallAmount,
+                     String dataGeneratorCharges, String dataDamageCharges, String dataGuestHouse, String dataVIPDine, String dataFunctionType,
                      String dataAddress, String dataPeopleCapacity, String hallamount, String referredby, String createdby, String createdtime,
                      String updatedby, String updatedtime) {
         this.dataFullName = dataFullName;
@@ -74,7 +73,6 @@ public class DataClass {
         this.dataGuestHouse = dataGuestHouse;
         this.dataVIPDine = dataVIPDine;
         this.dataFunctionType = dataFunctionType;
-        this.dataHallAmount = dataHallAmount;
         this.dataAddress = dataAddress;
         this.dataPeopleCapacity = dataPeopleCapacity;
         this.hallamount = hallamount;
@@ -180,10 +178,6 @@ public class DataClass {
 
     public String getDataFunctionType() {
         return dataFunctionType;
-    }
-
-    public String getDataHallAmount() {
-        return dataHallAmount;
     }
 
     public String getDataAddress() {

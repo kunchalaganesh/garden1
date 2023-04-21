@@ -1,5 +1,7 @@
 package com.example.ashrafapplication;
 
+import static com.example.ashrafapplication.EnterCustomerData.type;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ashrafapplication.models.Bookmodel;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +47,8 @@ public class DetailsActivity extends AppCompatActivity {
     String key = "";
     String imageUrl = "";
     LinearLayout totall;
+//    String type = "";
+    RelativeLayout edlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +92,7 @@ public class DetailsActivity extends AppCompatActivity {
         creadtedtime = findViewById(R.id.createdtime);
         updatedby = findViewById(R.id.updatedby);
         updatedtime = findViewById(R.id.updatetime);
+        edlayout = findViewById(R.id.edlayout);
 
         totall = findViewById(R.id.totall);
 
@@ -113,7 +120,15 @@ public class DetailsActivity extends AppCompatActivity {
             detailAdditional.setText(bundle.getString("additional"));
             key = bundle.getString("key");
             imageUrl = bundle.getString("Image");
+//            type = bundle.getString("type");
 
+
+
+            if(type.matches("delete")){
+
+                edlayout.setVisibility(View.GONE);
+
+            }
 
             if(Integer.parseInt(detailTotal_amount.getText().toString())!= Integer.parseInt(detailRemaining_bal.getText().toString())
             +Integer.parseInt(detailAdv_paid.getText().toString())){
@@ -202,86 +217,77 @@ if(bundle.getString("updatedtime") != null && !bundle.getString("updatedtime").m
         deleteButton.setOnClickListener(view -> {
             final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("bookings");
 
-            if(imageUrl != null) {
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
-                storageReference.delete().addOnSuccessListener(unused -> {
-                    reference.child(key).removeValue();
+//            if(imageUrl != null) {
+//                FirebaseStorage storage = FirebaseStorage.getInstance();
+//                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+//                storageReference.delete().addOnSuccessListener(unused -> {
+//                    reference.child(key).removeValue();
+//
+//                    List<Date> dates = getDates(detailBook_from.getText().toString(), detailBook_to.getText().toString());
+//                    for (Date date : dates) {
+//
+//                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//
+//// Format the Date object as a string in the desired format
+//                        String formattedDate = sdf.format(date);
+//
+//
+//                        FirebaseDatabase.getInstance().getReference()
+//                                .child("calendar")
+//                                .child("messages")
+//                                .child(formattedDate)
+//                                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                        if (!snapshot.exists()) {
+//                                            FirebaseDatabase.getInstance().getReference()
+//                                                    .child("calendar")
+//                                                    .child("alldates")
+//                                                    .child(formattedDate)
+//                                                    .removeValue();
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                    }
+//                                });
+//
+//                        FirebaseDatabase.getInstance().getReference()
+//                                .child("calendar")
+//                                .child("messages")
+//                                .child(formattedDate)
+//                                .child(detailPhone_number.getText().toString())
+//                                .removeValue();
+//
+//
+//                    }
+//
+//
+//                    Toast.makeText(DetailsActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(getApplicationContext(), EnterCustomerData.class));
+//                    finish();
+//                });
+//
+//            }else{
 
-                    List<Date> dates = getDates(detailBook_from.getText().toString(), detailBook_to.getText().toString());
-                    for (Date date : dates) {
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-// Format the Date object as a string in the desired format
-                        String formattedDate = sdf.format(date);
-
-
-                        FirebaseDatabase.getInstance().getReference()
-                                .child("calendar")
-                                .child("messages")
-                                .child(formattedDate)
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (!snapshot.exists()) {
-                                            FirebaseDatabase.getInstance().getReference()
-                                                    .child("calendar")
-                                                    .child("alldates")
-                                                    .child(formattedDate)
-                                                    .removeValue();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
-
-                        FirebaseDatabase.getInstance().getReference()
-                                .child("calendar")
-                                .child("messages")
-                                .child(formattedDate)
-                                .child(detailPhone_number.getText().toString())
-                                .removeValue();
-
-
-                    }
-
-
-                    Toast.makeText(DetailsActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), EnterCustomerData.class));
-                    finish();
-                });
-
-            }else{
-
-                reference.child(key).removeValue();
-
-                List<Date> dates = getDates(detailBook_from.getText().toString(), detailBook_to.getText().toString());
-                for (Date date : dates) {
-
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-// Format the Date object as a string in the desired format
-                    String formattedDate = sdf.format(date);
-
-
-                    FirebaseDatabase.getInstance().getReference()
-                            .child("calendar")
-                            .child("messages")
-                            .child(formattedDate)
+            FirebaseDatabase.getInstance().getReference()
+                            .child("bookings").child(key)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (!snapshot.exists()) {
-                                        FirebaseDatabase.getInstance().getReference()
-                                                .child("calendar")
-                                                .child("alldates")
-                                                .child(formattedDate)
-                                                .removeValue();
-                                    }
+                                    Bookmodel m = snapshot.getValue(Bookmodel.class);
+                                    FirebaseDatabase.getInstance().getReference()
+                                            .child("deleted")
+                                            .child(key)
+                                            .setValue(m);
+                                    reference.child(key).removeValue();
+
+                                    Toast.makeText(DetailsActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), EnterCustomerData.class));
+                                    finish();
+
                                 }
 
                                 @Override
@@ -290,23 +296,14 @@ if(bundle.getString("updatedtime") != null && !bundle.getString("updatedtime").m
                                 }
                             });
 
-                    FirebaseDatabase.getInstance().getReference()
-                            .child("calendar")
-                            .child("messages")
-                            .child(formattedDate)
-                            .child(detailPhone_number.getText().toString())
-                            .removeValue();
 
 
-                }
 
 
-                Toast.makeText(DetailsActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), EnterCustomerData.class));
-                finish();
 
 
-            }
+
+            //}
         });
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
