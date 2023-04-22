@@ -38,6 +38,7 @@ public class EnterCustomerData extends AppCompatActivity {
     ValueEventListener eventListener;
     RecyclerView recyclerView;
     List<DataClass> dataList;
+    ArrayList<DataClass> deletelist;
     MyAdapter adapter;
     SearchView searchView;
     Button previous, upcoming;
@@ -71,133 +72,14 @@ public class EnterCustomerData extends AppCompatActivity {
         bal = findViewById(R.id.balance);
         discount = findViewById(R.id.discount);
         delete = findViewById(R.id.delete);
+        deletelist = new ArrayList<>();
 
 
 
 
         delete.setBackground(ContextCompat.getDrawable(EnterCustomerData.this, R.drawable.ic_baseline_delete));
 
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                previous.setBackgroundColor(getResources().getColor(R.color.gray));
-                upcoming.setBackgroundColor(getResources().getColor(R.color.black));
-                delete.setBackground(ContextCompat.getDrawable(EnterCustomerData.this, R.drawable.ic_baseline_delete));
-
-                type = "read";
-                sttotal = 0;
-                stbal = 0;
-                stadv = 0;
-                sdate = "previous";
-
-
-//                ArrayList<DataClass> searchList = new ArrayList<>();
-////                searchList.addAll(dataList);
-//                ndatalist.clear();
-//                ndatalist.addAll(dataList);
-                adapter.searchDataList(ndatalist, sdate);
-//                adapter.searchDataList(ndatalist);
-//                adapter = new MyAdapter(EnterCustomerData.this, ndatalist, sdate);
-                adapter.notifyDataSetChanged();
-
-
-                for (int i = 0; i < ndatalist.size(); i++) {
-
-
-                    if(ndatalist.get(i).getDataTotalAmount().matches("")){
-                        sttotal = 0;
-                    }else {
-
-                        sttotal = sttotal + Integer.parseInt(ndatalist.get(i).getDataTotalAmount());
-                    }
-                    if(ndatalist.get(i).getDataRemainingBal() == null || ndatalist.get(i).getDataRemainingBal().matches("")){
-                        stbal = 0;
-                    }else {
-                        stbal = stbal + Integer.parseInt(ndatalist.get(i).getDataRemainingBal());
-
-                    }
-
-
-                    if(ndatalist.get(i).getDataAdvPaid().matches("")){
-                        stadv = 0;
-                    }else {
-                        stadv = stadv + Integer.parseInt(ndatalist.get(i).getDataAdvPaid());
-                    }
-
-//                    sttotal = sttotal + Integer.parseInt(ndatalist.get(i).getDataTotalAmount());
-//                    stbal = stbal + Integer.parseInt(ndatalist.get(i).getDataRemainingBal());
-//                    stadv = stadv + Integer.parseInt(ndatalist.get(i).getDataAdvPaid());
-
-
-                    Log.d("prevbal", ndatalist.get(i).getDataRemainingBal()+"  "+stbal);
-                }
-
-
-                discount.setText("Discount "+String.valueOf(sttotal - (stadv+stbal)));
-                total.setText("Total amount " + String.valueOf(sttotal));
-                bal.setText("Balance amount " + String.valueOf(stbal));
-                advance.setText("Advance amount " + String.valueOf(stadv));
-
-
-            }
-        });
-        upcoming.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                previous.setBackgroundColor(getResources().getColor(R.color.black));
-                upcoming.setBackgroundColor(getResources().getColor(R.color.gray));
-                delete.setBackground(ContextCompat.getDrawable(EnterCustomerData.this, R.drawable.ic_baseline_delete));
-
-                type = "read";
-                sdate = "upcoming";
-                sttotal = 0;
-                stbal = 0;
-                stadv = 0;
-//                adapter.searchDataList(ndatalist);
-                adapter.searchDataList(sdatalist, sdate);
-//                adapter.searchDataList(ndatalist);
-//                adapter = new MyAdapter(EnterCustomerData.this, ndatalist, sdate);
-                adapter.notifyDataSetChanged();
-
-
-                for (int i = 0; i < sdatalist.size(); i++) {
-
-
-                    if(sdatalist.get(i).getDataTotalAmount().matches("")){
-                        sttotal = 0;
-                    }else {
-
-                        sttotal = sttotal + Integer.parseInt(sdatalist.get(i).getDataTotalAmount());
-                    }
-                    if(sdatalist.get(i).getDataRemainingBal().matches("")){
-                        stbal = 0;
-                    }else {
-                        stbal = stbal + Integer.parseInt(sdatalist.get(i).getDataRemainingBal());
-                    }
-                    if(sdatalist.get(i).getDataAdvPaid().matches("")){
-                        stadv = 0;
-                    }else {
-                        stadv = stadv + Integer.parseInt(sdatalist.get(i).getDataAdvPaid());
-                    }
-
-//                    sttotal = sttotal + Integer.parseInt(sdatalist.get(i).getDataTotalAmount());
-//                    stbal = stbal + Integer.parseInt(sdatalist.get(i).getDataRemainingBal());
-//                    stadv = stadv + Integer.parseInt(sdatalist.get(i).getDataAdvPaid());
-
-
-                }
-
-                discount.setText("Discount "+String.valueOf(sttotal - (stadv+stbal)));
-                total.setText("Total amount " + String.valueOf(sttotal));
-                bal.setText("Balance amount " + String.valueOf(stbal));
-                advance.setText("Advance amount " + String.valueOf(stadv));
-
-
-
-            }
-        });
 
 
         searchView.clearFocus();
@@ -294,6 +176,216 @@ public class EnterCustomerData extends AppCompatActivity {
 
 
 
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                previous.setBackgroundColor(getResources().getColor(R.color.gray));
+                upcoming.setBackgroundColor(getResources().getColor(R.color.black));
+
+                delete.setBackground(ContextCompat.getDrawable(EnterCustomerData.this, R.drawable.ic_baseline_delete));
+
+                type = "read";
+                databaseReference = FirebaseDatabase.getInstance().getReference("bookings");
+                eventListener =
+
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                dataList.clear();
+                                ndatalist.clear();
+                                sdatalist.clear();
+                                deletelist.clear();
+
+                                sttotal = 0;
+                                stbal = 0;
+                                stadv = 0;
+                                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
+                                    //assert dataClass != null;//Check Here Auto generated
+
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                                    try {
+                                        Date date = dateFormat.parse(dataClass.getDataFromDate());
+                                        long timestamp = date.getTime();
+
+                                        long currentTimestamp = System.currentTimeMillis();
+                                        if (currentTimestamp > timestamp) {
+
+                                            dataClass.setKey(itemSnapshot.getKey());
+                                            ndatalist.add(dataClass);
+                                        } else {
+//                                            dataClass.setKey(itemSnapshot.getKey());
+//                                            sdatalist.add(dataClass);
+                                        }
+                                    } catch (Exception e) {
+
+                                    }
+                                    dataClass.setKey(itemSnapshot.getKey());
+//                                    dataList.add(dataClass);
+
+
+                                    for (int i = 0; i < ndatalist.size(); i++) {
+
+
+                                        if(ndatalist.get(i).getDataTotalAmount().matches("")){
+                                            sttotal = 0;
+                                        }else {
+
+                                            sttotal = sttotal + Integer.parseInt(ndatalist.get(i).getDataTotalAmount());
+                                        }
+                                        if(ndatalist.get(i).getDataRemainingBal() == null || ndatalist.get(i).getDataRemainingBal().matches("")){
+                                            stbal = 0;
+                                        }else {
+                                            stbal = stbal + Integer.parseInt(ndatalist.get(i).getDataRemainingBal());
+
+                                        }
+
+
+                                        if(ndatalist.get(i).getDataAdvPaid().matches("")){
+                                            stadv = 0;
+                                        }else {
+                                            stadv = stadv + Integer.parseInt(ndatalist.get(i).getDataAdvPaid());
+                                        }
+
+//                    sttotal = sttotal + Integer.parseInt(ndatalist.get(i).getDataTotalAmount());
+//                    stbal = stbal + Integer.parseInt(ndatalist.get(i).getDataRemainingBal());
+//                    stadv = stadv + Integer.parseInt(ndatalist.get(i).getDataAdvPaid());
+
+
+                                        Log.d("prevbal", ndatalist.get(i).getDataRemainingBal()+"  "+stbal);
+                                    }
+
+//                    sttotal = sttotal + Integer.parseInt(dataClass.getDataTotalAmount());
+//                    stbal = stbal + Integer.parseInt(dataClass.getDataRemainingBal());
+//                    stadv = stadv + Integer.parseInt(dataClass.getDataAdvPaid());
+
+
+                                }
+
+                                discount.setText("Discount "+String.valueOf(sttotal - (stadv+stbal)));
+                                total.setText("Total amount " + String.valueOf(sttotal));
+                                bal.setText("Balance amount " + String.valueOf(stbal));
+                                advance.setText("Advance amount " + String.valueOf(stadv));
+
+
+                                adapter.searchDataList(ndatalist, sdate);
+//                ndatalist.addAll(dataList);
+                                adapter.notifyDataSetChanged();
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                dialog.dismiss();
+                            }
+                        });
+
+
+            }
+        });
+        upcoming.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                previous.setBackgroundColor(getResources().getColor(R.color.black));
+                upcoming.setBackgroundColor(getResources().getColor(R.color.gray));
+                delete.setBackground(ContextCompat.getDrawable(EnterCustomerData.this, R.drawable.ic_baseline_delete));
+
+                type = "read";
+                databaseReference = FirebaseDatabase.getInstance().getReference("bookings");
+                eventListener =
+
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                dataList.clear();
+                                ndatalist.clear();
+                                sdatalist.clear();
+//                sttotal = 0;
+                                sttotal = 0;
+                                stbal = 0;
+                                stadv = 0;
+                                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
+                                    //assert dataClass != null;//Check Here Auto generated
+
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                                    try {
+                                        Date date = dateFormat.parse(dataClass.getDataFromDate());
+                                        long timestamp = date.getTime();
+
+                                        long currentTimestamp = System.currentTimeMillis();
+                                        if (currentTimestamp > timestamp) {
+
+                                            dataClass.setKey(itemSnapshot.getKey());
+                                            ndatalist.add(dataClass);
+                                        } else {
+                                            dataClass.setKey(itemSnapshot.getKey());
+                                            sdatalist.add(dataClass);
+                                        }
+                                    } catch (Exception e) {
+
+                                    }
+                                    dataClass.setKey(itemSnapshot.getKey());
+//                                    dataList.add(dataClass);
+
+
+                                    for (int i = 0; i < sdatalist.size(); i++) {
+
+
+                                        if(sdatalist.get(i).getDataTotalAmount().matches("")){
+                                            sttotal = 0;
+                                        }else {
+
+                                            sttotal = sttotal + Integer.parseInt(sdatalist.get(i).getDataTotalAmount());
+                                        }
+                                        if(sdatalist.get(i).getDataRemainingBal().matches("")){
+                                            stbal = 0;
+                                        }else {
+                                            stbal = stbal + Integer.parseInt(sdatalist.get(i).getDataRemainingBal());
+                                        }
+                                        if(sdatalist.get(i).getDataAdvPaid().matches("")){
+                                            stadv = 0;
+                                        }else {
+                                            stadv = stadv + Integer.parseInt(sdatalist.get(i).getDataAdvPaid());
+                                        }
+
+//                    sttotal = sttotal + Integer.parseInt(sdatalist.get(i).getDataTotalAmount());
+//                    stbal = stbal + Integer.parseInt(sdatalist.get(i).getDataRemainingBal());
+//                    stadv = stadv + Integer.parseInt(sdatalist.get(i).getDataAdvPaid());
+
+
+                                    }
+
+//                    sttotal = sttotal + Integer.parseInt(dataClass.getDataTotalAmount());
+//                    stbal = stbal + Integer.parseInt(dataClass.getDataRemainingBal());
+//                    stadv = stadv + Integer.parseInt(dataClass.getDataAdvPaid());
+
+
+                                }
+
+                                discount.setText("Discount "+String.valueOf(sttotal - (stadv+stbal)));
+                                total.setText("Total amount " + String.valueOf(sttotal));
+                                bal.setText("Balance amount " + String.valueOf(stbal));
+                                advance.setText("Advance amount " + String.valueOf(stadv));
+
+
+                                adapter.searchDataList(sdatalist, sdate);
+//                ndatalist.addAll(dataList);
+                                adapter.notifyDataSetChanged();
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                dialog.dismiss();
+                            }
+                        });
+
+
+            }
+        });
         //delete click
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -310,36 +402,19 @@ public class EnterCustomerData extends AppCompatActivity {
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        dataList.clear();
-                        ndatalist.clear();
-                        sdatalist.clear();
+
 //                sttotal = 0;
                         sttotal = 0;
                         stbal = 0;
                         stadv = 0;
+                        deletelist.clear();
                         for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                             DataClass dataClass = itemSnapshot.getValue(DataClass.class);
-                            //assert dataClass != null;//Check Here Auto generated
 
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                            try {
-                                Date date = dateFormat.parse(dataClass.getDataFromDate());
-                                long timestamp = date.getTime();
-
-                                long currentTimestamp = System.currentTimeMillis();
-                                if (currentTimestamp > timestamp) {
-
-                                    dataClass.setKey(itemSnapshot.getKey());
-                                    ndatalist.add(dataClass);
-                                } else {
-                                    dataClass.setKey(itemSnapshot.getKey());
-                                    sdatalist.add(dataClass);
-                                }
-                            } catch (Exception e) {
-
-                            }
-                            dataClass.setKey(itemSnapshot.getKey());
-                            dataList.add(dataClass);
+                            deletelist.add(dataClass);
+                            ndatalist.clear();
+                            sdatalist.clear();
+                            dataList.clear();
 
 
                             if(dataClass.getDataTotalAmount().matches("")){
@@ -359,11 +434,6 @@ public class EnterCustomerData extends AppCompatActivity {
                                 stadv = stadv + Integer.parseInt(dataClass.getDataAdvPaid());
                             }
 
-//                    sttotal = sttotal + Integer.parseInt(dataClass.getDataTotalAmount());
-//                    stbal = stbal + Integer.parseInt(dataClass.getDataRemainingBal());
-//                    stadv = stadv + Integer.parseInt(dataClass.getDataAdvPaid());
-
-
                         }
 
                         discount.setText("Discount "+String.valueOf(sttotal - (stadv+stbal)));
@@ -374,6 +444,7 @@ public class EnterCustomerData extends AppCompatActivity {
                         type = "delete";
 //                        adapter = new MyAdapter(EnterCustomerData.this, dataList, sdate, type);
 
+                        adapter.searchDataList(deletelist, sdate);
 //                ndatalist.addAll(dataList);
                         adapter.notifyDataSetChanged();
                         dialog.dismiss();
